@@ -1,0 +1,88 @@
+/* Contenedor principal - posición absoluta dentro de la card */
+.contenedor-menu-flotante {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+}
+
+/* posición por defecto (vertical) */
+.contenedor-menu-flotante {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  /* z-index por encima si lo necesitas */
+  z-index: 10;
+  /* resto de estilos */
+}
+
+.opciones-menu-flotante {
+  background: rgb(29, 29, 29);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  max-width: 60px;
+  overflow: hidden;
+}
+
+.contenedor-menu-flotante.horizontal {
+  top: 0px;
+  right: 0px;
+  transform: none;
+}
+
+/* Botón de tres puntos */
+.boton-menu-flotante {
+  background: rgba(255, 255, 255, 0);
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.boton-menu-flotante:hover {
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Menú desplegable */
+.opciones-menu-flotante {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background: rgb(29, 29, 29);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  min-width: 160px;
+  z-index: 1000;
+  overflow: hidden;
+  margin-top: 5px;
+}
+
+/* Opciones del menú */
+.opcion-flotante {
+  width: 100%;
+  padding: 10px 16px;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #ffffff;
+  font-size: 14px;
+  transition: background 0.2s ease;
+}
+
+.opcion-flotante:hover {
+  background: #3838385d;
+}
+
+.opcion-flotante span {
+  font-size: 16px;
+}

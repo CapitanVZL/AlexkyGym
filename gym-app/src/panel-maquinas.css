@@ -1,0 +1,568 @@
+.panel-maquinas-container {
+  min-height: auto;
+  max-height: none;
+  height: auto;
+  padding-bottom: 20px;
+  position: relative;
+  display: flex; /* Añade esto */
+  flex-direction: column; /* Organiza los elementos en columna */
+  align-items: center; /* Centra horizontalmente */
+  justify-content: flex-start; /* Alinea al inicio verticalmente */
+  width: 100%;
+}
+
+.filtro-container {
+  max-width: 60%;
+  margin-top: 0;
+  position: sticky;
+  text-align: center;
+  align-items: center;
+  padding: 8px 60px 8px 60px;
+  border-top: 1px solid rgba(255, 255, 255, 0.096);
+  border-left: 1px solid rgba(255, 255, 255, 0.096);
+  border-radius: 12px;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.349),
+    8px 8px 0px 0px rgba(0, 0, 0, 0.1); /* Sombra paralela blanca */
+}
+
+.no-resultados {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+  font-size: 1.2rem;
+}
+
+.filtro-btn {
+  padding: 6px 12px;
+  border: none;
+  background: none;
+  color: #f0f0f0;
+  font-size: 0.9rem;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filtro-btn:hover {
+  background-color: #68686862;
+}
+
+.filtro-btn.activo {
+  background-color: transparent;
+  color: #f801e4;
+  font-weight: 600;
+}
+
+/* Subrayado animado para botón activo */
+.filtro-btn.activo::after {
+  content: "";
+  position: absolute;
+  bottom: -4px; /* Posición bajo el texto */
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #f801e4; /* Mismo color que el texto activo */
+  transform: scaleX(1);
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+
+/* Efecto hover para el subrayado */
+.filtro-btn.activo:hover::after {
+  transform: scaleX(1.1); /* Ligero crecimiento al hover */
+}
+
+/* Versión alternativa con animación de entrada */
+.filtro-btn::after {
+  content: "";
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #f801e4;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+
+.filtro-btn.activo::after {
+  transform: scaleX(1);
+}
+
+.maquinas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  justify-items: center;
+}
+
+@media (min-width: 900px) {
+  .maquinas-grid {
+    grid-template-columns: repeat(3, 350px); /* Ancho fijo */
+    justify-content: center; /* Centra el grid si no ocupa todo el ancho */
+    gap: 20px;
+  }
+}
+
+.maquina-card {
+  min-height: 400px;
+  min-width: 320px;
+  height: auto;
+  margin-left: #0080ff00;
+  background-color: rgba(255, 255, 255, 0.048);
+  border-top: 1px solid rgba(255, 255, 255, 0.096);
+  border-left: 1px solid rgba(255, 255, 255, 0.096);
+  border-radius: 12px;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.349),
+    8px 8px 0px 0px rgba(0, 0, 0, 0.1); /* Sombra paralela blanca */
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.8s ease, box-shadow 0.3s ease;
+}
+
+.maquina-card:hover {
+  transform: translateY(-5px); /* Transform ORIGINAL */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3),
+    8px 8px 0px 0px rgba(123, 255, 0, 0.199); /* Sombra paralela aumentada */
+}
+
+/* Efecto de textura sutil (opcional) */
+.maquina-card {
+  background-image: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.05) 0%,
+      rgba(255, 255, 255, 0.03) 100%
+    ),
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" opacity="0.03"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noise)"/></svg>');
+}
+
+.maquina-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 12px;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+  pointer-events: none;
+  transition: box-shadow 0.3s ease;
+}
+
+.maquina-card:hover::after {
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.15);
+}
+
+.maquina-imagen-container {
+  width: 100%;
+  height: 270px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.048);
+}
+
+.maquina-imagen {
+  width: 100%;
+  height: 100%;
+  object-fit: scale-down;
+  object-position: center;
+  transition: transform 0.5s ease;
+}
+
+.maquina-card:hover .maquina-imagen {
+  transform: scale(1.05);
+}
+
+.maquina-info-container {
+  color: white;
+  padding: 16px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.maquina-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.maquina-modelo {
+  color: #ffffff;
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+.maquina-estado {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  margin-left: 10px;
+  font-weight: bold;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.estado-operativa {
+  background-color: #27ae60;
+}
+
+.estado-mantenimiento {
+  background-color: #f39c12;
+}
+
+.estado-inactiva {
+  background-color: #e74c3c;
+}
+
+.maquina-details p {
+  margin: 8px 0;
+  color: #a3a3a3;
+  font-size: 0.9rem;
+  display: flex;
+  text-align: left;
+}
+
+.detail-label {
+  font-weight: 600;
+  color: #a3a3a3;
+  min-width: 120px;
+  display: inline-block;
+  text-align: left;
+}
+
+@media (max-width: 1024px) {
+  .maquinas-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .maquinas-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .maquinas-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .maquina-imagen-container {
+    height: 220px;
+  }
+}
+
+@media (max-width: 480px) {
+  .maquinas-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .maquina-imagen-container {
+    height: 220px;
+  }
+}
+
+.card-button {
+  all: unset; /* Elimina todos los estilos heredados */
+  /* Ahora agrega solo los estilos que necesitas */
+  display: inline-block;
+  cursor: pointer;
+  /* Tus estilos específicos aquí */
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  text-align: inherit;
+  text-decoration: none;
+  padding: 15px;
+}
+
+/* Contenedor (igual en ambos estados) */
+.container-boton-horizontal {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 260px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  background: #2b2a2a00;
+  border-radius: 6px;
+  margin-left: auto;
+}
+
+.boton-ordenar-maquinas {
+  margin-right: 260px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  background: #2b2a2a;
+  border-radius: 6px;
+  margin-left: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.096);
+  border-left: 1px solid rgba(255, 255, 255, 0.096);
+  border-radius: 12px;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.349),
+    8px 8px 0px 0px rgba(0, 0, 0, 0.1); /* Sombra paralela blanca */
+}
+
+.boton-agregar-maquinas {
+  margin-left: 260px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 2px;
+  background: #4caf50;
+  border-radius: 20px;
+  margin-right: auto;
+  width: 200px;
+  color: white;
+  border-top: 1px solid rgba(255, 255, 255, 0.096);
+  border-left: 1px solid rgba(255, 255, 255, 0.096);
+  border-radius: 12px;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.349),
+    8px 8px 0px 0px rgba(0, 0, 0, 0.1); /* Sombra paralela blanca */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.boton-agregar-maquinas:hover {
+  transform: translateY(-5px); /* Transform ORIGINAL */
+}
+
+.icono-agregar {
+  font-size: 2rem;
+  color: rgb(255, 0, 0);
+}
+
+/* Estilos base del botón */
+.Boton-horizontal {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+/* Botón en estado HORIZONTAL */
+.Boton-horizontal.horizontal-activo {
+  background: #4caf50;
+  color: white;
+}
+
+/* Botón en estado VERTICAL */
+.Boton-horizontal.vertical-activo {
+  background: #2196f3;
+  color: white;
+}
+
+/* Texto "Ordenar por" (siempre igual) */
+.container-boton-horizontal p {
+  margin: 0;
+  color: white;
+}
+/* Estilos para la vista horizontal compacta */
+.maquinas-grid.horizontal {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 90%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.card-horizontal {
+  min-width: 90%;
+  min-height: 40px;
+  height: auto;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.048);
+  border-top: 1px solid rgba(255, 255, 255, 0.096);
+  border-left: 1px solid rgba(255, 255, 255, 0.096);
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.349);
+  padding: 0 15px;
+  transition: all 0.3s ease;
+}
+
+.card-horizontal:hover {
+  transform: translateY(-2px);
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.4);
+}
+
+.card-horizontal .card-button {
+  display: flex;
+  width: 100%;
+  padding: 10px 0;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.card-horizontal .maquina-info-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 30px;
+  width: 100%;
+  padding: 0;
+}
+
+.card-horizontal .maquina-header {
+  display: flex;
+  flex: 1;
+  margin: 0;
+  min-width: 200px;
+}
+
+.card-horizontal .maquina-modelo {
+  font-size: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-horizontal .maquina-details {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  flex: 2;
+  margin: 0;
+}
+
+.card-horizontal .maquina-details p {
+  margin: 0;
+  min-width: 150px;
+  white-space: nowrap;
+}
+
+.card-horizontal .maquina-estado {
+  margin: 0;
+  min-width: 120px;
+  text-align: center;
+  padding: 5px 10px;
+}
+
+/* Ocultar imagen en vista horizontal */
+.card-horizontal .maquina-imagen-container {
+  display: none;
+}
+
+/* Menú flotante */
+/* Contenedor del menú (no afecta el layout) */
+.menu-flotante-wrapper {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+  width: 0;
+  height: 0;
+}
+
+/* Botón de tres puntos */
+.menu-flotante-boton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  color: #666;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.menu-flotante-boton:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/* Opciones del menú */
+.menu-flotante-opciones {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  min-width: 160px;
+  overflow: hidden;
+}
+
+.menu-item {
+  width: 100%;
+  padding: 8px 16px;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #333;
+}
+
+.menu-item:hover {
+  background-color: #f5f5f5;
+}
+
+/* Estilos para modo oscuro */
+@media (prefers-color-scheme: dark) {
+  .menu-flotante-boton {
+    color: #aaa;
+  }
+
+  .menu-flotante-boton:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+  }
+
+  .menu-flotante-opciones {
+    background: #2c2c2c;
+    border: 1px solid #444;
+  }
+
+  .menu-item {
+    color: #e0e0e0;
+  }
+
+  .menu-item:hover {
+    background-color: #3a3a3a;
+  }
+}
+
+.menu-flotante-wrapper {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+}

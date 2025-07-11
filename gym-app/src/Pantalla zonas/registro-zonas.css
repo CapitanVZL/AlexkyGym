@@ -1,0 +1,166 @@
+/* Estructura principal */
+.parent-zonas {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-rows:
+    80px /* Fila 1: Barra superior */
+    auto /* Fila 2: Contenido principal */;
+  gap: 8px;
+  width: 100%;
+  height: 100vh;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.div1-zonas {
+  grid-column: 1 / span 5;
+  background: #2c2c2c;
+}
+
+.div3-zonas {
+  grid-column: 1 / span 5;
+  display: grid;
+  place-items: center; /* Esto centra el contenido */
+}
+
+/* Estilos del formulario */
+.form-container-zonas {
+  background: #2c2c2c;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.973);
+  height: 90%;
+  width: 80%;
+  box-sizing: border-box;
+}
+
+.form-title {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 1.8rem;
+  text-align: center;
+  color: #ffffff;
+  font-weight: 600;
+  padding: 0;
+}
+
+.form-content {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 20px;
+  height: calc(100% - 60px);
+}
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* MODIFICACIÓN PRINCIPAL: Scroll para la tabla */
+.table-section {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Contiene el scroll interno */
+}
+
+.table-container {
+  flex: 1;
+  overflow-y: auto;
+  max-height: calc(100vh - 250px); /* Ajusta este valor según necesites */
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #ffffff;
+}
+
+/* Estilos de campos del formulario */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-field label {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #ffffff;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 90%;
+  padding: 8px;
+  border-radius: 6px;
+  background-color: #202020;
+  color: #ffffff;
+  font-size: 0.95rem;
+}
+
+.form-field textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* Botones */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+.action-button {
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s;
+  border: none;
+}
+
+.action-button:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.primary-button {
+  background-color: rgba(51, 173, 40, 0.726);
+  color: white;
+}
+
+.secondary-button {
+  background-color: rgba(173, 40, 40, 0.726);
+  color: white;
+  border: 1px solid #444;
+}
+
+/* Tabla de datos */
+.data-table th,
+.data-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #444;
+}
+
+.data-table th {
+  background-color: rgba(24, 248, 4, 0.2);
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+}
+
+.data-table tr:hover {
+  background-color: rgba(24, 248, 4, 0.1);
+}
+
+.data-table input[type="checkbox"] {
+  transform: scale(1.2);
+  cursor: pointer;
+}

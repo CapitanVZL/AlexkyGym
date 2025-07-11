@@ -1,0 +1,163 @@
+/* historico-estado-page.css */
+
+/* Contenedor principal */
+.historico-container {
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 40px;
+  border-radius: 12px;
+  font-family: Arial, sans-serif;
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.048);
+  border-top: 1px solid rgba(255, 255, 255, 0.096);
+  border-left: 1px solid rgba(255, 255, 255, 0.096);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.349);
+}
+
+/* Título */
+.historico-container h2 {
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+  text-align: center;
+  color: var(--primary-blue);
+}
+
+/* Botón de regreso */
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: #1a1a1a;
+  color: white;
+  border-radius: 8px;
+  padding: 8px 15px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: background-color 0.25s;
+}
+
+.back-button:hover {
+  background-color: #2a2a2a;
+}
+
+/* Formulario con estructura de 3 filas */
+.historico-form {
+  display: grid;
+  grid-template-areas:
+    "fecha estado-anterior"
+    "estado-nuevo estado-nuevo"
+    "motivo motivo"
+    "boton boton";
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* Asignación de áreas */
+.historico-form label:nth-child(1) {
+  grid-area: fecha;
+}
+.historico-form label:nth-child(2) {
+  grid-area: estado-anterior;
+}
+.historico-form label:nth-child(3) {
+  grid-area: estado-nuevo;
+}
+.historico-form label:nth-child(4) {
+  grid-area: motivo;
+}
+.historico-form .submit-button {
+  grid-area: boton;
+}
+
+/* Estilos para los campos */
+.historico-form label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 5px;
+}
+
+.historico-form input,
+.historico-form select,
+.historico-form textarea {
+  width: 100%;
+  padding: 8px;
+  border-radius: 6px;
+  background-color: var(--background-light);
+  color: var(--text-dark);
+  font-size: 0.95rem;
+  height: 38px;
+  box-sizing: border-box;
+}
+
+/* Textarea con altura fija */
+.historico-form textarea {
+  height: 120px;
+  resize: none;
+}
+
+/* Estilos específicos para el contenedor de Estado Nuevo */
+.historico-form label:nth-child(3) {
+  grid-column: span 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra horizontalmente */
+  margin-top: 10px;
+}
+
+/* Estilos para el select de Estado Nuevo */
+.historico-form label:nth-child(3) select {
+  width: 50%; /* Ancho reducido */
+  margin: 0 auto; /* Centrado automático */
+  display: block; /* Importante para que funcione el margin auto */
+  text-align: center; /* Centra el texto dentro del select */
+  padding: 8px 12px; /* Ajuste de padding */
+}
+
+/* Botón de enviar */
+.submit-button {
+  padding: 10px;
+  background-color: #1a1a1a;
+  color: white;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.25s;
+  border: none;
+  margin-top: 10px;
+}
+
+.submit-button:hover {
+  background-color: #2a2a2a;
+}
+
+/* Modo oscuro */
+@media (prefers-color-scheme: dark) {
+  .historico-container {
+    background: var(--background-dark);
+  }
+
+  .historico-form input,
+  .historico-form select,
+  .historico-form textarea {
+    background-color: #2c2c2c;
+    color: var(--text-light);
+    border: 1px solid var(--input-border-dark);
+  }
+}
+
+/* Clases para errores */
+.error-border {
+  border: 2px solid #ff4444 !important;
+}
+
+.error-message {
+  color: #ff4444;
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+}

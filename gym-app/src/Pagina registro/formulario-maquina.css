@@ -1,0 +1,237 @@
+/* Botón */
+button {
+  grid-column: span 2; /* Ocupa las dos columnas */
+  padding: 10px;
+  background-color: #1a1a1a;
+  color: white;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+button:disabled {
+  background-color: #1a1a1a;
+  cursor: not-allowed;
+}
+
+/* Variables CSS - Paleta de colores */
+:root {
+  --primary-blue: #fcfbfb;
+  --primary-blue-dark: #333333;
+  --border-color: red;
+  --text-dark: #ffffff;
+  --input-background: #ffffff;
+  --button-secondary-bg: #f5f5f5;
+  --button-secondary-hover: #e0e0e0;
+  --success-bg: #dff0d8;
+  --success-text: #3c763d;
+  --error-bg: #f2dede;
+  --error-text: #ff4444;
+  --disabled-bg: #cccccc;
+}
+
+[data-theme="dark"] {
+  --background-light: #1a1a1a;
+  --primary-blue: #2563eb;
+  --primary-blue-dark: #1d4ed8;
+  --border-color: #818181;
+  --text-dark: #f8f8f8;
+  --input-background: #2d2d2d;
+  --button-secondary-bg: #333333;
+  --button-secondary-hover: #444444;
+}
+
+/* Contenedor principal */
+.registro-formulario {
+  flex: 10;
+  height: 100%;
+  background: var(--background-light);
+  border-radius: 12px;
+  margin-left: 40px;
+  padding: 40px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.507);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  overflow-y: auto;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Título */
+.registro-formulario h1 {
+  margin-bottom: 30px;
+  font-size: 1.8rem;
+  text-align: center;
+  color: var(--primary-blue);
+}
+
+/* Estructura del formulario */
+.registro-formulario form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+/* Contenedores de campos */
+.registro-formulario .form-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+/* Etiquetas */
+.registro-formulario label {
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+  color: var(--text-dark);
+}
+
+/* Campos de entrada - Manteniendo borde rojo en light mode */
+.registro-formulario input[type="text"],
+.registro-formulario input[type="number"],
+.registro-formulario input[type="date"],
+.registro-formulario select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background-color: var(--input-background);
+  color: var(--text-dark);
+  font-size: 0.95rem;
+  height: 38px;
+  box-sizing: border-box;
+}
+
+.registro-formulario input:focus,
+.registro-formulario select:focus {
+  outline: none;
+  border-color: var(--primary-blue);
+}
+
+/* Select personalizado */
+.registro-formulario select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+}
+
+/* Grupos musculares */
+.grupos-musculares-container {
+  grid-column: span 2;
+  margin: 15px 0;
+}
+
+.grupos-label {
+  display: block;
+  margin-bottom: 12px;
+  font-weight: 500;
+  color: var(--text-dark);
+}
+
+.grupos-botones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.grupo-btn {
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+  background-color: rgb(26, 26, 26);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  color: var(--text-dark);
+}
+
+.grupo-btn:hover {
+  background-color: var(--button-secondary-hover);
+}
+
+.grupo-btn.seleccionado {
+  background-color: #4caf50;
+  color: white;
+  border-color: #4caf50;
+}
+
+/* Botón de envío */
+.registro-formulario button[type="submit"] {
+  grid-column: span 2;
+  padding: 10px;
+  background-color: var(--primary-blue);
+  color: white;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.25s;
+  border: none;
+}
+
+.registro-formulario button[type="submit"]:hover {
+  background-color: var(--primary-blue-dark);
+}
+
+.registro-formulario button[type="submit"]:disabled {
+  background-color: var(--disabled-bg);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Estado del envío */
+.submit-status {
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  text-align: center;
+  grid-column: span 2;
+}
+
+.submit-status.success {
+  background-color: var(--success-bg);
+  color: var(--success-text);
+}
+
+.submit-status.error {
+  background-color: var(--error-bg);
+  color: var(--error-text);
+}
+
+/* Mensajes de error */
+.error-message {
+  color: var(--error-text);
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+  display: block;
+}
+
+.error-border {
+  border: 2px solid var(--error-text) !important;
+}
+
+/* Modo oscuro */
+@media (prefers-color-scheme: dark) {
+  .registro-formulario input[type="text"],
+  .registro-formulario input[type="number"],
+  .registro-formulario input[type="date"],
+  .registro-formulario select {
+    border: 1px solid rgb(247, 247, 247);
+    background-color: rgba(27, 27, 27, 0);
+  }
+
+  select option {
+    background-color: #1a1a1a;
+    color: white;
+  }
+
+  .grupo-btn {
+    border: 1px solid #555;
+  }
+}
